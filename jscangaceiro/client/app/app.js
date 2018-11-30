@@ -1,5 +1,5 @@
 //criou a instancia do controller
-let controller = new NegociacaoController();
+const controller = new NegociacaoController();
 
 //associa o evento de submissao do formulário á chamada do método "adicionar"
 
