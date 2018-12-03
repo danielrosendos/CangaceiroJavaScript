@@ -1,7 +1,4 @@
-//criou a instancia do controller
 const controller = new NegociacaoController();
-
-//associa o evento de submissao do formulário á chamada do método "adicionar"
 
 document
     .querySelector('.form')
