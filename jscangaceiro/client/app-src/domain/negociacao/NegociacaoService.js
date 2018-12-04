@@ -1,5 +1,6 @@
 import { HttpService } from '../../util/HttpService.js';
 import { Negociacao } from './Negociacao.js';
+import { ApplicationException } from '../../util/ApplicationException.js';
 
 export class NegociacaoService {
 
@@ -20,7 +21,7 @@ export class NegociacaoService {
                 return negociacoes;
             },
             err => {
-                throw new Error('Não foi possível obter as negociações');          
+                throw ApplicationException('Não foi possível obter as negociações');          
             }
         );
     
@@ -37,7 +38,7 @@ export class NegociacaoService {
                 return negociacoes;
             },
             err => {
-                throw new Error('Não foi possível obter as negociações da semana anterior');          
+                throw ApplicationException('Não foi possível obter as negociações da semana anterior');          
             }
         );
 
@@ -60,21 +61,21 @@ export class NegociacaoService {
 
     }
 
-    obtemNegociacoesDoPeriodo() { 
+    async obtemNegociacoesDoPeriodo() { 
 
-        return Promise.all([
-            this.obterNegociacoesDaSemana(),
-            this.obtemNegociacoesDaSemanaAnterior(),
-            this.obtemNegociacoesDaSemanaRetrasada()
-        ])
-        .then(periodo => periodo
-            .reduce((novoArray, item) => novoArray.concat(item), [])
-            .sort((a, b) => b.data.getTime() - a.data.getTime())
-        )
-        .catch(err => { 
+        try {
+            let periodo = await Promise.all([
+                this.obterNegociacoesDaSemana(),
+                this.obtemNegociacoesDaSemanaAnterior(),
+                this.obtemNegociacoesDaSemanaRetrasada()
+            ]);
+            return periodo
+                .reduce((novoArray, item) => novoArray.concat(item), [])
+                .sort((a, b) => b.data.getTime() - a.data.getTime());
+        } catch(err) {
             console.log(err);
             throw new Error('Não foi possível obter as negociações do periodo')
-        });
+        }
 
     }
 
