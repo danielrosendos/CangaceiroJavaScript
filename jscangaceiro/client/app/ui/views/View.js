@@ -1,17 +1,29 @@
-class View {
+System.register([], function (_export, _context) {
+    "use strict";
 
-    constructor(seletor) {
+    return {
+        setters: [],
+        execute: function () {
+            class View {
 
-        this._elemento = document.querySelector(seletor);
-    }
+                constructor(seletor) {
 
-    update(model) {
+                    this._elemento = document.querySelector(seletor);
+                }
 
-        this._elemento.innerHTML = this.template(model);
-    }
+                update(model) {
 
-    template(model) {
+                    this._elemento.innerHTML = this.template(model);
+                }
 
-        throw new Error('Você precisa implementar o método template');
-    }
-}  
+                template(model) {
+
+                    throw new Error('Você precisa implementar o método template');
+                }
+            }
+
+            _export('View', View);
+        }
+    };
+});
+//# sourceMappingURL=View.js.map
