@@ -13,7 +13,7 @@ export class NegociacaoService {
     obterNegociacoesDaSemana(cb) {
 
         return this._http
-        .get('negociacoes/semana')
+        .get('http://localhost:3000/negociacoes/semana')
         .then(
             dados => {
                 const negociacoes = dados.map(objeto => 
@@ -30,7 +30,7 @@ export class NegociacaoService {
     obtemNegociacoesDaSemanaAnterior() {
 
         return this._http
-        .get('negociacoes/anterior')
+        .get('http://localhost:3000/negociacoes/anterior')
         .then(
             dados => {
                 const negociacoes = dados.map(objeto => 
@@ -47,7 +47,7 @@ export class NegociacaoService {
     obtemNegociacoesDaSemanaRetrasada() {
 
         return this._http
-        .get('negociacoes/retrasada')
+        .get('http://localhost:3000/negociacoes/retrasada')
         .then(
             dados => {
                 const negociacoes = dados.map(objeto => 
